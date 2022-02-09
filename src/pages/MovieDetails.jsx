@@ -4,26 +4,24 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function MovieDetails() {
-
-  const imageUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path;
-
   const {movieId} = useParams();
-  // const [movie, setMovie] = useState(null)
-  console.log(movieId)
+  const [movie, setMovie] = useState(null)
+  // console.log(movieId)
+  // const API_KEY = `3d9d528c10bd10aab1dcbcd5f1f8f9bf`
 
-  // useEffect(()=>{
-  //   // fetch(`
-  //   // https://api.themoviedb.org/3/movie/${movieId}?api_key=3d9d528c10bd10aab1dcbcd5f1f8f9bf`)
-  //   // .then((result)=> result.json())
-  //   // .then((data)=>{
-  //   //   setMovie(data)
-  //   // });
-  // },[movieId]);
+  useEffect(()=>{
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=3d9d528c10bd10aab1dcbcd5f1f8f9bf`)
+    .then((result)=> result.json())
+    .then((data)=>{
+      setMovie(data)
+    });
+  },[movieId]);
 
-  // if(!movie){
-  //   return null;
-  // }
-
+  if(!movie){
+    return null;
+  }
+  const imageUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path;
+  
   return <div className={styles.container}>
       <img className={`${styles.col} ${styles.movieImage}`} src={imageUrl} alt={movie.title} />
       <div className={`${styles.col} ${styles.movieDetails}`}>
