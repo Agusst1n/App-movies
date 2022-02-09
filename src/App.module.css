@@ -1,0 +1,7 @@
+body{
+  background-color: #110D0E;
+}
+.header{
+  display: grid;
+  justify-content: center;
+}
